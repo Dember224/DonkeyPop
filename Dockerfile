@@ -1,10 +1,13 @@
 FROM python:3.12-slim-bookworm
 
-WORKDIR /Users/antoinewashington/DonkeyPop
+WORKDIR /app
 
-COPY rerquirements.txt ./
+RUN pip install --upgrade pip &&\
+pip install pipenv==2025.0.4
 
-RUN pip install -r rerquirements.txt
+COPY ["Pipfile", "Pipfile.lock"]
+
+RUN pipenv install
 
 COPY . .
 
