@@ -12,6 +12,9 @@ mypy = "*"
 black = "*"
 types-requests = "*"
 beautifulsoup4 = "*"
+python-dotenv = "*"
+isort = "*"
+atproto = "*"
 
 [dev-packages]
 

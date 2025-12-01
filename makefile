@@ -12,3 +12,4 @@ stop:
 
 format:
 	pipenv run black . --exclude '/.gitignore|Pipfile|Pipfile.lock|.mypy_cache/'
+	isort .
