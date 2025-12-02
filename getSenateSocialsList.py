@@ -77,7 +77,7 @@ def get_bsky_did(last_name: str) -> str:
     return did
 
 
-def lookup_feed(politician_last_name: str):
+def lookup_feed(politician_last_name: str) -> list[tuple]:
     """Take the last name of a politician and return that politicians
     bluesky feed. https://docs.bsky.app/docs/tutorials/viewing-feeds"""
 
