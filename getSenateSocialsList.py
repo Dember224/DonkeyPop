@@ -6,7 +6,7 @@ import os
 from typing import TypedDict
 
 import requests
-from atproto import Client, IdResolver
+from atproto import Client
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
@@ -62,15 +62,29 @@ def parse_handles(last_name: str) -> str:
     Even if the candidates account handle involves a custom domain
     ie .senate.gov the .bsky.social
     handle is reserved for them and is the only way to access DIDs"""
-    return f"{last_name}.bsky.social"
+    return f"{last_name}.senate.gov"
 
 
-def get_bsky_did():
+def get_bsky_did(last_name: str) -> str:
     """Receive the handle of a candidate and return their bsky DID.
     This specialspecial identifier is needed for certain calls with
     the bluesky sdk. Docs here:
     https://docs.bsky.app/docs/advanced-guides/resolving-identities
     """
-    resolver = IdResolver()
-    did = resolver.handle.resolve("alsobrooks.bsky.social")
+    client = login_bsky()
+    handle = parse_handles(last_name)
+    did = client.get_profile(actor=handle).did
     return did
+
+
+def lookup_feed(politician_last_name: str):
+    """Take the last name of a politician and return that politicians
+    bluesky feed. https://docs.bsky.app/docs/tutorials/viewing-feeds"""
+
+    client = login_bsky()
+    did = get_bsky_did(politician_last_name)
+    data = client.get_author_feed(
+        actor=did,
+        limit=100
+    )
+    return data.feed
