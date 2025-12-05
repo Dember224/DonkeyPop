@@ -1,5 +1,5 @@
 """
-Get A list of all Senate Democrats and their social media accounts.
+Get raw data on blue sky feeds for politicians.
 """
 
 import os

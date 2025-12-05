@@ -1,3 +1,7 @@
+"""
+Get lists of politicians who we want information on.
+"""
+
 from typing import TypedDict
 
 import requests
